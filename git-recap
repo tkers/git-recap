@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+USER=$(git config user.name)
+
+git --no-pager log \
+    --all \
+    --no-merges \
+    --first-parent \
+    --abbrev-commit \
+    --oneline \
+    --committer="$USER" \
+    --since="1 week" \
+    --reverse \
+    --pretty=format:"%Cgreen%>(14)%cr%Creset -%C(bold blue)%d%Creset %s"
+
+echo ""
