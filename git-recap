@@ -1,16 +1,34 @@
 #!/usr/bin/env bash
 
-USER=$(git config user.name)
+CMD="git --no-pager log"
+EMAIL=$(git config user.email)
+OPTS="--all --no-merges --first-parent --reverse --committer=$EMAIL"
+ONE_NEWLINE="--max-count=1 --pretty=format:%n"
+RANGE_LONG="1 week"
+RANGE_SHORT="24 hours"
 
-git --no-pager log \
-    --all \
-    --no-merges \
-    --first-parent \
-    --abbrev-commit \
-    --oneline \
-    --committer="$USER" \
-    --since="1 week" \
-    --reverse \
-    --pretty=format:"%Cgreen%>(14)%cr%Creset -%C(bold blue)%d%Creset %s"
+# padding on top
+$CMD $OPTS \
+    --since="$RANGE_LONG" \
+    --until="$RANGE_SHORT" \
+    $ONE_NEWLINE
 
+# last week
+$CMD $OPTS \
+    --since="$RANGE_LONG" \
+    --until="$RANGE_SHORT" \
+    --pretty=format:"%Cgreen%>(14)%cr%Creset - %s%C(bold blue)%d%Creset"
+
+# newline
+$CMD $OPTS \
+    --since="$RANGE_SHORT" \
+    $ONE_NEWLINE
+
+# last day
+$CMD $OPTS \
+    --since="$RANGE_SHORT" \
+    --pretty=format:"%C(bold green)%>(14)%cr%Creset - %s%C(bold blue)%d%Creset"
+
+# padding on bottom
+echo ""
 echo ""
