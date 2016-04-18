@@ -6,7 +6,11 @@ Inspired by [kamranahmedse/git-standup](https://github.com/kamranahmedse/git-sta
 
 ## Install
 
-Download and copy the `git-recap` file into your `/usr/local/bin` folder.
+```sh
+    git clone https://github.com/Lapixx/git-recap.git
+    cd git-recap
+    make install
+```
 
 ## Usage
 
