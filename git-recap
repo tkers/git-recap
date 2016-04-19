@@ -5,26 +5,39 @@ EMAIL=$(git config user.email)
 OPTS="--all --no-merges --first-parent --reverse --committer=$EMAIL"
 ONE_NEWLINE="--max-count=1 --pretty=format:%n"
 RANGE_LONG="1 week"
-RANGE_SHORT="24 hours"
+RANGE_MEDIUM="24 hours"
+RANGE_SHORT="midnight"
 
 # padding on top
 $CMD $OPTS \
     --since="$RANGE_LONG" \
-    --until="$RANGE_SHORT" \
+    --until="$RANGE_MEDIUM" \
     $ONE_NEWLINE
 
 # last week
 $CMD $OPTS \
     --since="$RANGE_LONG" \
+    --until="$RANGE_MEDIUM" \
+    --pretty=format:"%C(yellow)%>(14)%cr%Creset - %s%C(bold blue)%d%Creset"
+
+# newline
+$CMD $OPTS \
+    --since="$RANGE_MEDIUM" \
     --until="$RANGE_SHORT" \
-    --pretty=format:"%Cgreen%>(14)%cr%Creset - %s%C(bold blue)%d%Creset"
+    $ONE_NEWLINE
+
+# last 24 hours
+$CMD $OPTS \
+    --since="$RANGE_MEDIUM" \
+    --until="$RANGE_SHORT" \
+    --pretty=format:"%C(bold yellow)%>(14)%cr%Creset - %s%C(bold blue)%d%Creset"
 
 # newline
 $CMD $OPTS \
     --since="$RANGE_SHORT" \
     $ONE_NEWLINE
 
-# last day
+# last 24 hours
 $CMD $OPTS \
     --since="$RANGE_SHORT" \
     --pretty=format:"%C(bold green)%>(14)%cr%Creset - %s%C(bold blue)%d%Creset"
