@@ -5,7 +5,7 @@ EMAIL=$(git config user.email)
 OPTS="--all --no-merges --first-parent --reverse --committer=$EMAIL"
 ONE_NEWLINE="--max-count=1 --pretty=format:%n"
 RANGE_LONG="1 week"
-RANGE_MEDIUM="24 hours"
+RANGE_MEDIUM="yesterday midnight"
 RANGE_SHORT="midnight"
 
 # padding on top
