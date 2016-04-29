@@ -2,7 +2,7 @@
 
 CMD="git --no-pager log"
 EMAIL=$(git config user.email)
-OPTS="--all --no-merges --first-parent --reverse --committer=$EMAIL"
+OPTS="--branches --no-merges --reverse --committer=$EMAIL"
 ONE_NEWLINE="--max-count=1 --pretty=format:%n"
 RANGE_LONG="1 week"
 RANGE_MEDIUM="yesterday midnight"
